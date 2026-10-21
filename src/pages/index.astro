@@ -1,88 +1,51 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import NavHeader from '../components/NavHeader.astro';
+import HomeHeader from '../components/HomeHeader.astro';
 import SocialCard from '../components/SocialCard.astro';
-import Footer from '../components/Footer.astro';
+import HomeFooter from '../components/HomeFooter.astro';
 import { socialPlatforms } from '../data/socials';
 ---
 
 <Layout 
-  title="ByteSized AI | Media, Systems & Frontier Automation"
-  description="ByteSized AI official media hub. Explore our channels across Facebook, Instagram, Threads, YouTube, TikTok, X, and Pinterest."
+  title="ByteSized AI | Official Syndication Channels"
+  description="Official social media channels and creative syndication network for ByteSized AI."
+  theme="cream"
 >
-  <!-- Global Clean Navigation Header -->
-  <NavHeader currentPath="/" />
+  <HomeHeader />
 
-  <main class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-14">
-    
-    <!-- Hero Section -->
-    <section class="text-center space-y-5 max-w-3xl mx-auto">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-cyan-400 font-mono text-xs">
-        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-        Multi-Channel Content &amp; Media Hub
-      </div>
-
-      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
-        ByteSized <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-indigo-400">Media Network</span>
-      </h1>
-
-      <p class="text-base sm:text-lg text-slate-400 leading-relaxed max-w-2xl mx-auto font-sans">
-        Bite-sized intelligence, automated visual storytelling, and high-cadence AI insights syndicated across all mainstream platforms.
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-12">
+    <!-- Focused Apple Introduction -->
+    <header class="max-w-2xl space-y-3">
+      <p class="text-xs font-semibold uppercase tracking-wider text-[#86868B]">
+        Distribution Network
       </p>
-    </section>
+      <h1 class="text-3xl sm:text-5xl font-bold tracking-tight text-[#1D1D1F]">
+        ByteSized AI
+      </h1>
+      <p class="text-base sm:text-lg text-[#6E6E73] font-normal leading-relaxed">
+        Official social media channels &amp; creative syndication network.
+      </p>
+    </header>
 
-    <!-- Featured Matrix Callout Card -->
-    <section class="max-w-4xl mx-auto">
-      <div class="relative rounded-2xl bg-gradient-to-r from-indigo-950/60 via-slate-900/90 to-cyan-950/60 border border-cyan-500/30 p-6 sm:p-8 shadow-2xl overflow-hidden group hover:border-cyan-400/60 transition-all">
-        <div class="absolute -right-10 -bottom-10 w-60 h-60 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div class="space-y-2">
-            <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-mono border border-indigo-500/30">
-              <i class="fa-solid fa-microchip"></i> Engineering Workspace
-            </div>
-            <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">
-              Looking for the Frontier Model Comparison Matrix?
-            </h2>
-            <p class="text-xs sm:text-sm text-slate-300 max-w-xl">
-              Access the full 5-model comparative benchmark across 8 core operational dimensions, complete with live filtering, tier strategies, and AST telemetry.
-            </p>
-          </div>
-
-          <a 
-            href="/compare/" 
-            class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white font-mono font-semibold text-sm shadow-lg shadow-cyan-500/25 transition-all whitespace-nowrap group-hover:scale-105"
-          >
-            <span>Launch Matrix</span>
-            <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Social Media Placeholder Grid Section -->
+    <!-- Social Media Syndication Channels Section -->
     <section class="space-y-6">
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-workspace-border/80 pb-4">
-        <div>
-          <span class="text-xs font-mono uppercase tracking-widest text-slate-400 flex items-center gap-2">
-            <i class="fa-solid fa-share-nodes text-cyan-400"></i> Channels &amp; Syndication
-          </span>
-          <h2 class="text-2xl font-bold text-white tracking-tight mt-1">Official Media Channels</h2>
-        </div>
-        <span class="text-xs font-mono text-slate-400">
-          7 Connected Networks &bull; Updated Daily
+      <div class="flex items-center justify-between pb-3 border-b border-[#EAE6DF]">
+        <h2 class="text-xs font-semibold uppercase tracking-wider text-[#86868B]">
+          Syndicated Channels
+        </h2>
+        <span class="text-xs text-[#86868B] font-medium">
+          7 Active Platforms
         </span>
       </div>
 
-      <!-- 7 Social Media Cards Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <!-- 7 Social Media Cards Responsive Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {socialPlatforms.map((platform) => (
           <SocialCard platform={platform} />
         ))}
       </div>
     </section>
-
   </main>
 
-  <!-- Clean Footer -->
-  <Footer />
+  <HomeFooter />
 </Layout>

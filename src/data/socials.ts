@@ -6,12 +6,16 @@ export interface SocialPlatform {
   url: string;
   icon: string;
   iconColor: string;
-  bgGlow: string;
-  borderColor: string;
-  hoverBorder: string;
+  iconBg?: string;
+  brandColor?: string;
   statusText: string;
-  badgeColor: string;
+  stats: string;
   description: string;
+  // Legacy compatibility
+  bgGlow?: string;
+  borderColor?: string;
+  hoverBorder?: string;
+  badgeColor?: string;
 }
 
 export const socialPlatforms: SocialPlatform[] = [
@@ -22,13 +26,12 @@ export const socialPlatforms: SocialPlatform[] = [
     handle: '@bytesizedai',
     url: 'https://facebook.com',
     icon: 'fa-brands fa-facebook-f',
-    iconColor: 'text-blue-500',
-    bgGlow: 'hover:shadow-[0_0_30px_-5px_rgba(59,130,246,0.3)]',
-    borderColor: 'border-blue-900/40',
-    hoverBorder: 'hover:border-blue-500/60',
-    statusText: 'Official Page',
-    badgeColor: 'bg-blue-500/10 text-blue-400 border-blue-500/30',
-    description: 'Long-form video drops, technical discussions, and AI engineering community updates.'
+    iconColor: 'text-[#1877F2]',
+    iconBg: 'bg-[#EFF6FF]',
+    brandColor: '#1877F2',
+    statusText: 'Official Hub',
+    stats: '42.5K Followers',
+    description: 'Long-form automated video syndication, technical engineering breakdowns, and enterprise AI community posts.'
   },
   {
     id: 'instagram',
@@ -37,28 +40,26 @@ export const socialPlatforms: SocialPlatform[] = [
     handle: '@bytesized.ai',
     url: 'https://instagram.com',
     icon: 'fa-brands fa-instagram',
-    iconColor: 'text-pink-400',
-    bgGlow: 'hover:shadow-[0_0_30px_-5px_rgba(244,63,94,0.3)]',
-    borderColor: 'border-pink-900/40',
-    hoverBorder: 'hover:border-pink-500/60',
-    statusText: 'Active Stories',
-    badgeColor: 'bg-pink-500/10 text-pink-400 border-pink-500/30',
-    description: 'Short-form visual breakdowns, kinetic UI motion snippets, and design token reels.'
+    iconColor: 'text-[#E1306C]',
+    iconBg: 'bg-[#FFF1F2]',
+    brandColor: '#E1306C',
+    statusText: 'Daily Reels',
+    stats: '128K Monthly Reach',
+    description: 'Kinetic design systems, short-form automated visual snippets, and dynamic model benchmark cards.'
   },
   {
     id: 'threads',
     name: 'Threads',
-    category: 'Micro-Discussions',
+    category: 'Discussions',
     handle: '@bytesized.ai',
     url: 'https://threads.net',
     icon: 'fa-brands fa-threads',
-    iconColor: 'text-slate-100',
-    bgGlow: 'hover:shadow-[0_0_30px_-5px_rgba(255,255,255,0.2)]',
-    borderColor: 'border-slate-800',
-    hoverBorder: 'hover:border-slate-500/70',
-    statusText: 'Live Stream',
-    badgeColor: 'bg-slate-700/30 text-slate-200 border-slate-600/40',
-    description: 'Daily quick-fire prompt engineering tips, benchmark polls, and casual dev chatter.'
+    iconColor: 'text-[#1D1D1F]',
+    iconBg: 'bg-[#F5F3EF]',
+    brandColor: '#1D1D1F',
+    statusText: 'Dev Stream',
+    stats: '18.4K Devs',
+    description: 'Real-time telemetry discussions, AI prompt engineering dispatches, and quick-fire benchmark comparisons.'
   },
   {
     id: 'youtube',
@@ -67,13 +68,12 @@ export const socialPlatforms: SocialPlatform[] = [
     handle: '@bytesizedAI',
     url: 'https://youtube.com',
     icon: 'fa-brands fa-youtube',
-    iconColor: 'text-red-500',
-    bgGlow: 'hover:shadow-[0_0_30px_-5px_rgba(239,68,68,0.3)]',
-    borderColor: 'border-red-900/40',
-    hoverBorder: 'hover:border-red-500/60',
-    statusText: '4K Shorts & Deep Dives',
-    badgeColor: 'bg-red-500/10 text-red-400 border-red-500/30',
-    description: 'Comprehensive model architecture teardowns, automated agent workflows, and Remotion demos.'
+    iconColor: 'text-[#FF0000]',
+    iconBg: 'bg-[#FEF2F2]',
+    brandColor: '#FF0000',
+    statusText: '4K Shorts',
+    stats: '65.2K Subscribers',
+    description: 'Automated Remotion video workflows, deep architectural model teardowns, and multi-agent pipelines.'
   },
   {
     id: 'tiktok',
@@ -82,28 +82,26 @@ export const socialPlatforms: SocialPlatform[] = [
     handle: '@bytesizedai',
     url: 'https://tiktok.com',
     icon: 'fa-brands fa-tiktok',
-    iconColor: 'text-cyan-400',
-    bgGlow: 'hover:shadow-[0_0_30px_-5px_rgba(6,182,212,0.3)]',
-    borderColor: 'border-cyan-900/40',
-    hoverBorder: 'hover:border-cyan-400/60',
-    statusText: 'Trending Tech',
-    badgeColor: 'bg-cyan-500/10 text-cyan-300 border-cyan-500/30',
-    description: 'Rapid 60-second AI tool comparisons, coding tips, and viral workflow automation hacks.'
+    iconColor: 'text-[#1D1D1F]',
+    iconBg: 'bg-[#F5F5F7]',
+    brandColor: '#1D1D1F',
+    statusText: 'Viral Tech',
+    stats: '310K Views/mo',
+    description: 'Rapid 60-second AI tool comparisons, high-energy coding snippets, and syndication automation hacks.'
   },
   {
     id: 'x',
-    name: 'X (Twitter)',
+    name: 'X',
     category: 'Real-Time News',
     handle: '@bytesizedai',
     url: 'https://x.com',
     icon: 'fa-brands fa-x-twitter',
-    iconColor: 'text-white',
-    bgGlow: 'hover:shadow-[0_0_30px_-5px_rgba(255,255,255,0.25)]',
-    borderColor: 'border-slate-800',
-    hoverBorder: 'hover:border-white/50',
+    iconColor: 'text-[#1D1D1F]',
+    iconBg: 'bg-[#F5F5F7]',
+    brandColor: '#1D1D1F',
     statusText: 'Breaking Intel',
-    badgeColor: 'bg-white/10 text-white border-white/20',
-    description: 'First-to-know LLM release evaluations, live latency telemetry, and code benchmark threads.'
+    stats: '89.4K Engagements',
+    description: 'Zero-day frontier release coverage, latency and pricing telemetry drops, and AI benchmark threads.'
   },
   {
     id: 'pinterest',
@@ -112,12 +110,11 @@ export const socialPlatforms: SocialPlatform[] = [
     handle: '@bytesizedai',
     url: 'https://pinterest.com',
     icon: 'fa-brands fa-pinterest',
-    iconColor: 'text-rose-500',
-    bgGlow: 'hover:shadow-[0_0_30px_-5px_rgba(244,63,94,0.3)]',
-    borderColor: 'border-rose-900/40',
-    hoverBorder: 'hover:border-rose-500/60',
+    iconColor: 'text-[#E60023]',
+    iconBg: 'bg-[#FFF1F2]',
+    brandColor: '#E60023',
     statusText: 'Design Moodboards',
-    badgeColor: 'bg-rose-500/10 text-rose-400 border-rose-500/30',
-    description: 'Curated design systems, AI dashboard layout templates, and generative UI component boards.'
+    stats: '24.1K Monthly Pins',
+    description: 'Curated design systems, generative UI component boards, and automated infographic aesthetics.'
   }
 ];
