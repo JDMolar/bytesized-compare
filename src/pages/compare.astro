@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import NavHeader from '../components/NavHeader.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
 import TierCards from '../components/TierCards.astro';
@@ -8,108 +9,30 @@ import SpecsSection from '../components/SpecsSection.astro';
 import Footer from '../components/Footer.astro';
 ---
 
-<Layout title="Frontier AI Model Comparison | bytesizedai.algotyx.com/compare">
+<Layout 
+  title="Frontier AI Model Matrix | bytesizedai.algotyx.com/compare"
+  description="Engineering workspace dashboard matrix comparing Claude Opus 5.5, GPT-6 Astra, GPT-6.1 Sol, Gemini 4 Argon, and Gemini 3.8 Flash Max across 8 workspace dimensions."
+>
+  <!-- Global Navigation Header -->
+  <NavHeader currentPath="/compare" />
+
+  <!-- Matrix Action Header with Interactive Filters -->
   <Header />
 
   <main class="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+    <!-- Intro Hero & Telemetry KPI Row -->
     <Hero />
+
+    <!-- 3 Multi-Model Pipeline Strategy Tier Cards -->
     <TierCards />
+
+    <!-- 5-Model x 8-Dimension Evaluation Matrix -->
     <MatrixTable />
+
+    <!-- Architectural Guardrails & Edge Specifications -->
     <SpecsSection />
   </main>
 
+  <!-- Engineering Footer -->
   <Footer />
-
-  <script>
-    // State management for interactive table filtering
-    function initMatrixInteractions() {
-      const filterButtons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
-      const searchInput = document.getElementById('metricSearch') as HTMLInputElement | null;
-      const label = document.getElementById('activeFilterLabel');
-      const cells = document.querySelectorAll<HTMLElement>('.matrix-cell');
-      const rows = document.querySelectorAll<HTMLElement>('.metric-row');
-
-      const btnMap: Record<string, string> = {
-        'all': 'btn-all',
-        'Best in Class': 'btn-best',
-        'Cost-Effective': 'btn-cost',
-        'Capable': 'btn-capable',
-        'Premium Tier': 'btn-premium'
-      };
-
-      function setFilter(badgeType: string) {
-        filterButtons.forEach(btn => {
-          btn.classList.remove('bg-slate-800', 'text-white', 'shadow-sm');
-          btn.classList.add('text-slate-300');
-        });
-
-        const activeId = btnMap[badgeType];
-        const activeBtn = activeId ? document.getElementById(activeId) : null;
-        if (activeBtn) {
-          activeBtn.classList.add('bg-slate-800', 'text-white', 'shadow-sm');
-          activeBtn.classList.remove('text-slate-300');
-        }
-
-        if (label) {
-          label.innerText = badgeType === 'all' 
-            ? 'Active Filter: All Dimensions (40 Cells)' 
-            : `Active Filter: Spotlight on "${badgeType}"`;
-        }
-
-        cells.forEach(cell => {
-          const badge = cell.getAttribute('data-badge');
-          if (badgeType === 'all' || badge === badgeType) {
-            cell.classList.remove('cell-dimmed');
-            if (badgeType !== 'all') {
-              cell.classList.add('cell-highlighted');
-            } else {
-              cell.classList.remove('cell-highlighted');
-            }
-          } else {
-            cell.classList.add('cell-dimmed');
-            cell.classList.remove('cell-highlighted');
-          }
-        });
-      }
-
-      function searchMetrics() {
-        if (!searchInput) return;
-        const query = searchInput.value.toLowerCase();
-        rows.forEach(row => {
-          const rowText = row.innerText.toLowerCase();
-          row.style.display = rowText.includes(query) ? '' : 'none';
-        });
-      }
-
-      filterButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-          const filterValue = btn.getAttribute('data-filter') || 'all';
-          setFilter(filterValue);
-        });
-      });
-
-      if (searchInput) {
-        searchInput.addEventListener('input', searchMetrics);
-      }
-
-      window.addEventListener('keydown', (e) => {
-        if (e.key === '/' && document.activeElement?.tagName !== 'INPUT') {
-          e.preventDefault();
-          searchInput?.focus();
-        } else if (e.key === 'Escape') {
-          if (searchInput) {
-            searchInput.value = '';
-            searchMetrics();
-          }
-          setFilter('all');
-        }
-      });
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initMatrixInteractions);
-    } else {
-      initMatrixInteractions();
-    }
-  </script>
 </Layout>

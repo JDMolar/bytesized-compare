@@ -1,0 +1,52 @@
+---
+import type { SocialPlatform } from '../data/socials';
+
+export interface Props {
+  platform: SocialPlatform;
+}
+
+const { platform } = Astro.props;
+---
+
+<a 
+  href={platform.url} 
+  target="_blank" 
+  rel="noopener noreferrer"
+  class={`group relative rounded-xl bg-workspace-card/80 border ${platform.borderColor} p-6 shadow-lg ${platform.hoverBorder} ${platform.bgGlow} transition-all duration-300 flex flex-col justify-between overflow-hidden hover:-translate-y-1`}
+>
+  <div class="space-y-4">
+    <!-- Platform Top Header -->
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center justify-center text-xl shadow-inner group-hover:scale-110 transition-transform">
+          <i class={`${platform.icon} ${platform.iconColor}`}></i>
+        </div>
+        <div>
+          <h3 class="text-base font-bold text-white tracking-tight group-hover:text-cyan-300 transition-colors">
+            {platform.name}
+          </h3>
+          <span class="text-xs font-mono text-slate-400">
+            {platform.handle}
+          </span>
+        </div>
+      </div>
+
+      <span class={`text-[10px] font-mono px-2 py-0.5 rounded-full border ${platform.badgeColor}`}>
+        {platform.statusText}
+      </span>
+    </div>
+
+    <!-- Platform Description -->
+    <p class="text-xs text-slate-400 leading-relaxed">
+      {platform.description}
+    </p>
+  </div>
+
+  <!-- Bottom Action Link Indicator -->
+  <div class="mt-5 pt-3.5 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono text-slate-400 group-hover:text-white transition-colors">
+    <span class="text-[11px] text-slate-500 uppercase tracking-wider">{platform.category}</span>
+    <span class="flex items-center gap-1.5 text-cyan-400 font-semibold group-hover:translate-x-1 transition-transform">
+      Connect <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+    </span>
+  </div>
+</a>

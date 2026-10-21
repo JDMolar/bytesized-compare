@@ -1,116 +1,88 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Hero from '../components/Hero.astro';
-import TierCards from '../components/TierCards.astro';
-import MatrixTable from '../components/MatrixTable.astro';
-import SpecsSection from '../components/SpecsSection.astro';
+import NavHeader from '../components/NavHeader.astro';
+import SocialCard from '../components/SocialCard.astro';
 import Footer from '../components/Footer.astro';
+import { socialPlatforms } from '../data/socials';
 ---
 
-<Layout>
-  <Header />
+<Layout 
+  title="ByteSized AI | Media, Systems & Frontier Automation"
+  description="ByteSized AI official media hub. Explore our channels across Facebook, Instagram, Threads, YouTube, TikTok, X, and Pinterest."
+>
+  <!-- Global Clean Navigation Header -->
+  <NavHeader currentPath="/" />
 
-  <main class="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
-    <Hero />
-    <TierCards />
-    <MatrixTable />
-    <SpecsSection />
+  <main class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-14">
+    
+    <!-- Hero Section -->
+    <section class="text-center space-y-5 max-w-3xl mx-auto">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-cyan-400 font-mono text-xs">
+        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+        Multi-Channel Content &amp; Media Hub
+      </div>
+
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+        ByteSized <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-indigo-400">Media Network</span>
+      </h1>
+
+      <p class="text-base sm:text-lg text-slate-400 leading-relaxed max-w-2xl mx-auto font-sans">
+        Bite-sized intelligence, automated visual storytelling, and high-cadence AI insights syndicated across all mainstream platforms.
+      </p>
+    </section>
+
+    <!-- Featured Matrix Callout Card -->
+    <section class="max-w-4xl mx-auto">
+      <div class="relative rounded-2xl bg-gradient-to-r from-indigo-950/60 via-slate-900/90 to-cyan-950/60 border border-cyan-500/30 p-6 sm:p-8 shadow-2xl overflow-hidden group hover:border-cyan-400/60 transition-all">
+        <div class="absolute -right-10 -bottom-10 w-60 h-60 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div class="space-y-2">
+            <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-mono border border-indigo-500/30">
+              <i class="fa-solid fa-microchip"></i> Engineering Workspace
+            </div>
+            <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">
+              Looking for the Frontier Model Comparison Matrix?
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-300 max-w-xl">
+              Access the full 5-model comparative benchmark across 8 core operational dimensions, complete with live filtering, tier strategies, and AST telemetry.
+            </p>
+          </div>
+
+          <a 
+            href="/compare/" 
+            class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white font-mono font-semibold text-sm shadow-lg shadow-cyan-500/25 transition-all whitespace-nowrap group-hover:scale-105"
+          >
+            <span>Launch Matrix</span>
+            <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Social Media Placeholder Grid Section -->
+    <section class="space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-workspace-border/80 pb-4">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-widest text-slate-400 flex items-center gap-2">
+            <i class="fa-solid fa-share-nodes text-cyan-400"></i> Channels &amp; Syndication
+          </span>
+          <h2 class="text-2xl font-bold text-white tracking-tight mt-1">Official Media Channels</h2>
+        </div>
+        <span class="text-xs font-mono text-slate-400">
+          7 Connected Networks &bull; Updated Daily
+        </span>
+      </div>
+
+      <!-- 7 Social Media Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {socialPlatforms.map((platform) => (
+          <SocialCard platform={platform} />
+        ))}
+      </div>
+    </section>
+
   </main>
 
+  <!-- Clean Footer -->
   <Footer />
-
-  <script>
-    // State management for interactive table filtering
-    function initMatrixInteractions() {
-      const filterButtons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
-      const searchInput = document.getElementById('metricSearch') as HTMLInputElement | null;
-      const label = document.getElementById('activeFilterLabel');
-      const cells = document.querySelectorAll<HTMLElement>('.matrix-cell');
-      const rows = document.querySelectorAll<HTMLElement>('.metric-row');
-
-      const btnMap: Record<string, string> = {
-        'all': 'btn-all',
-        'Best in Class': 'btn-best',
-        'Cost-Effective': 'btn-cost',
-        'Capable': 'btn-capable',
-        'Premium Tier': 'btn-premium'
-      };
-
-      function setFilter(badgeType: string) {
-        filterButtons.forEach(btn => {
-          btn.classList.remove('bg-slate-800', 'text-white', 'shadow-sm');
-          btn.classList.add('text-slate-300');
-        });
-
-        const activeId = btnMap[badgeType];
-        const activeBtn = activeId ? document.getElementById(activeId) : null;
-        if (activeBtn) {
-          activeBtn.classList.add('bg-slate-800', 'text-white', 'shadow-sm');
-          activeBtn.classList.remove('text-slate-300');
-        }
-
-        if (label) {
-          label.innerText = badgeType === 'all' 
-            ? 'Active Filter: All Dimensions (40 Cells)' 
-            : `Active Filter: Spotlight on "${badgeType}"`;
-        }
-
-        cells.forEach(cell => {
-          const badge = cell.getAttribute('data-badge');
-          if (badgeType === 'all' || badge === badgeType) {
-            cell.classList.remove('cell-dimmed');
-            if (badgeType !== 'all') {
-              cell.classList.add('cell-highlighted');
-            } else {
-              cell.classList.remove('cell-highlighted');
-            }
-          } else {
-            cell.classList.add('cell-dimmed');
-            cell.classList.remove('cell-highlighted');
-          }
-        });
-      }
-
-      function searchMetrics() {
-        if (!searchInput) return;
-        const query = searchInput.value.toLowerCase();
-        rows.forEach(row => {
-          const rowText = row.innerText.toLowerCase();
-          row.style.display = rowText.includes(query) ? '' : 'none';
-        });
-      }
-
-      filterButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-          const filterValue = btn.getAttribute('data-filter') || 'all';
-          setFilter(filterValue);
-        });
-      });
-
-      if (searchInput) {
-        searchInput.addEventListener('input', searchMetrics);
-      }
-
-      window.addEventListener('keydown', (e) => {
-        if (e.key === '/' && document.activeElement?.tagName !== 'INPUT') {
-          e.preventDefault();
-          searchInput?.focus();
-        } else if (e.key === 'Escape') {
-          if (searchInput) {
-            searchInput.value = '';
-            searchMetrics();
-          }
-          setFilter('all');
-        }
-      });
-    }
-
-    // Initialize on DOM load and after View Transitions
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initMatrixInteractions);
-    } else {
-      initMatrixInteractions();
-    }
-  </script>
 </Layout>
