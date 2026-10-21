@@ -1,0 +1,49 @@
+---
+---
+
+<section id="specs" class="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-4">
+  <!-- Architectural Card: Operational Guardrails -->
+  <div class="rounded-xl bg-workspace-surface/90 border border-workspace-border p-5 space-y-3">
+    <div class="flex items-center gap-2 text-cyan-400 font-mono text-xs font-semibold">
+      <i class="fa-solid fa-shield-virus"></i> Safety &amp; Guardrail Routing
+    </div>
+    <h4 class="text-sm font-bold text-white">Deterministic Agent Isolation</h4>
+    <p class="text-xs text-slate-400 leading-relaxed">
+      Production orchestrator routes stateful operations through short-lived subagents. Sensitive credentials and production environment secrets are scrubbed at the MCP gateway boundary prior to model dispatch.
+    </p>
+    <div class="pt-2 border-t border-slate-800 text-[11px] font-mono text-slate-500 flex justify-between">
+      <span>Zero Plaintext Keys</span>
+      <span class="text-emerald-400">Strict Sandboxing</span>
+    </div>
+  </div>
+
+  <!-- Architectural Card: Cache Invalidation & Ingestion -->
+  <div class="rounded-xl bg-workspace-surface/90 border border-workspace-border p-5 space-y-3">
+    <div class="flex items-center gap-2 text-emerald-400 font-mono text-xs font-semibold">
+      <i class="fa-solid fa-database"></i> Context Memory &amp; Cache
+    </div>
+    <h4 class="text-sm font-bold text-white">2M+ Token Context Compression</h4>
+    <p class="text-xs text-slate-400 leading-relaxed">
+      Monorepos and historical AST traces are indexed via Gemini 3.8 Flash Max's 2M buffer. Cache keys are rehydrated dynamically, resulting in sub-cent retrieval costs and immediate subagent warm starts.
+    </p>
+    <div class="pt-2 border-t border-slate-800 text-[11px] font-mono text-slate-500 flex justify-between">
+      <span>Hit Rate: 94.6%</span>
+      <span class="text-cyan-400">&lt;140ms TTFT</span>
+    </div>
+  </div>
+
+  <!-- Architectural Card: Cloudflare Edge Deployment -->
+  <div class="rounded-xl bg-workspace-surface/90 border border-workspace-border p-5 space-y-3">
+    <div class="flex items-center gap-2 text-purple-400 font-mono text-xs font-semibold">
+      <i class="fa-solid fa-cloud"></i> Edge Routing &amp; CDNs
+    </div>
+    <h4 class="text-sm font-bold text-white">bytesizedai.algotyx.com / compare</h4>
+    <p class="text-xs text-slate-400 leading-relaxed">
+      Served via Cloudflare Global Anycast Edge with zero origin latency. Static Tailwind and FontAwesome vectors cached globally with strict Content Security Policies and zero runtime framework bloat.
+    </p>
+    <div class="pt-2 border-t border-slate-800 text-[11px] font-mono text-slate-500 flex justify-between">
+      <span>Cloudflare Edge</span>
+      <span class="text-purple-400">Zone: algotyx.com</span>
+    </div>
+  </div>
+</section>

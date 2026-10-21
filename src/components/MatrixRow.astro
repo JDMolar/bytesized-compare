@@ -1,0 +1,43 @@
+---
+import type { MetricDimension } from '../data/metrics';
+import type { ModelInfo } from '../data/models';
+import Badge from './Badge.astro';
+
+export interface Props {
+  metric: MetricDimension;
+  models: ModelInfo[];
+}
+
+const { metric, models } = Astro.props;
+---
+
+<tr class="metric-row group hover:bg-slate-900/50 transition-colors">
+  <th scope="row" class="sticky-col-cell p-4 align-top text-left border-r border-slate-800/80">
+    <div class="flex items-center gap-2 text-white font-semibold text-sm">
+      <i class={`${metric.icon} ${metric.iconColor}`}></i> {metric.name}
+    </div>
+    <div class="text-[11px] text-slate-400 mt-1 font-sans leading-snug">
+      {metric.description}
+    </div>
+  </th>
+
+  {models.map((model, idx) => {
+    const evalData = metric.evaluations[model.id];
+    const isLast = idx === models.length - 1;
+    return (
+      <td 
+        class={`p-4 align-top ${!isLast ? 'border-r border-workspace-border/50' : ''} matrix-cell`} 
+        data-badge={evalData?.badge}
+      >
+        {evalData && (
+          <>
+            <Badge badge={evalData.badge} />
+            <p class="text-slate-300 mt-2 leading-relaxed font-sans">
+              {evalData.synthesis}
+            </p>
+          </>
+        )}
+      </td>
+    );
+  })}
+</tr>

@@ -1,0 +1,55 @@
+---
+import type { TierStrategy } from '../data/tiers';
+
+export interface Props {
+  tier: TierStrategy;
+}
+
+const { tier } = Astro.props;
+---
+
+<div class={`group relative rounded-xl bg-workspace-card/90 border border-workspace-border p-6 shadow-xl ${tier.hoverBorder} ${tier.hoverShadow} transition-all duration-300 flex flex-col justify-between overflow-hidden`}>
+  <div class={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${tier.gradientBar}`}></div>
+  <div class="space-y-4">
+    <div class="flex items-start justify-between">
+      <div class={`w-10 h-10 rounded-lg ${tier.iconBg} flex items-center justify-center ${tier.iconColor} text-lg`}>
+        <i class={tier.icon}></i>
+      </div>
+      <span class="text-[11px] font-mono font-medium px-2.5 py-0.5 rounded-full bg-slate-800/80 border border-slate-700/80 text-slate-300">
+        {tier.badge}
+      </span>
+    </div>
+
+    <div>
+      <h4 class="text-lg font-bold text-white tracking-tight">{tier.title}</h4>
+      <p class="text-xs text-slate-400 mt-1">{tier.subtitle}</p>
+    </div>
+
+    <div class="space-y-2.5 pt-2 border-t border-slate-800/80">
+      {tier.roles.map((role) => (
+        <div class="flex items-center justify-between text-xs">
+          <span class="text-slate-400 font-mono">{role.label}:</span>
+          {role.isHighlight ? (
+            <span class="font-semibold text-white font-mono bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700">
+              {role.model}
+            </span>
+          ) : (
+            <span class="font-mono text-slate-300">{role.model}</span>
+          )}
+        </div>
+      ))}
+    </div>
+
+    <p class="text-xs text-slate-300 leading-relaxed bg-slate-900/60 p-3 rounded-lg border border-slate-800/60">
+      {tier.description}
+    </p>
+  </div>
+
+  <div class="mt-5 pt-4 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
+    <span class="flex items-center gap-1.5">
+      <i class={`fa-solid fa-chart-pie ${tier.splitIconColor}`}></i>
+      {tier.splitText}
+    </span>
+    <span class={`${tier.benefitColor} font-semibold`}>{tier.benefitText}</span>
+  </div>
+</div>

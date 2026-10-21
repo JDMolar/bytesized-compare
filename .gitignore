@@ -1,0 +1,32 @@
+# build output
+dist/
+
+# generated types
+.astro/
+
+# dependencies
+node_modules/
+
+# environment variables
+.env
+.env.production
+.env.local
+.env.*.local
+
+# editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# system files
+.DS_Store
+Thumbs.db
+
+# cloudflare & local artifacts
+.cloudflare/
+graphify-out/

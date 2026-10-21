@@ -1,0 +1,88 @@
+---
+import { models } from '../data/models';
+import { metrics } from '../data/metrics';
+import MatrixRow from './MatrixRow.astro';
+---
+
+<section id="matrix" class="space-y-4">
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+    <div>
+      <span class="text-xs font-mono uppercase tracking-widest text-slate-400 flex items-center gap-2">
+        <i class="fa-solid fa-chart-simple text-emerald-400"></i> Frontier Benchmark Matrix
+      </span>
+      <h3 class="text-xl font-bold text-white tracking-tight">5-Model Technical Synthesis by Dimension</h3>
+    </div>
+    
+    <!-- Legend & Mobile Horizontal Scroll Prompt -->
+    <div class="flex items-center gap-2 text-xs font-mono text-slate-400 flex-wrap">
+      <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+        <i class="fa-solid fa-crown text-[10px]"></i> Best in Class
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
+        <i class="fa-solid fa-bolt text-[10px]"></i> Cost-Effective
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/30">
+        <i class="fa-solid fa-check-double text-[10px]"></i> Capable
+      </span>
+      <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-purple-500/10 text-purple-400 border border-purple-500/30">
+        <i class="fa-solid fa-gem text-[10px]"></i> Premium
+      </span>
+    </div>
+  </div>
+
+  <!-- Scroll Notification Hint for Mobile/Compact Viewports -->
+  <div class="flex items-center justify-between text-xs font-mono text-slate-400 bg-slate-900/60 px-3.5 py-1.5 rounded-lg border border-slate-800/80">
+    <span class="flex items-center gap-2">
+      <i class="fa-solid fa-arrows-left-right text-cyan-400 animate-pulse"></i>
+      <span>Horizontally scrollable table with locked category column anchor</span>
+    </span>
+    <span id="activeFilterLabel" class="text-cyan-400 font-semibold">Active Filter: All Dimensions (40 Cells)</span>
+  </div>
+
+  <!-- Table Wrapper with Smooth Overflow -->
+  <div class="relative overflow-x-auto rounded-xl border border-workspace-border bg-workspace-surface shadow-2xl">
+    <table class="w-full text-left border-collapse min-w-[1520px]" id="matrixTable">
+      
+      <!-- Sticky Model Header Row -->
+      <thead>
+        <tr class="border-b border-workspace-border/90 text-xs font-mono">
+          
+          <!-- Locked Category Corner Header -->
+          <th scope="col" class="sticky-col-header p-4 min-w-[240px] w-[260px] text-slate-300 border-r border-slate-800/90 shadow-[4px_0_12px_rgba(0,0,0,0.5)]">
+            <div class="flex items-center justify-between">
+              <span class="uppercase tracking-wider font-bold text-white flex items-center gap-2">
+                <i class="fa-solid fa-compass-drafting text-cyan-400"></i> Metric Vector
+              </span>
+              <span class="text-[10px] text-slate-500">8 Dimensions</span>
+            </div>
+          </th>
+
+          {models.map((model, idx) => {
+            const isLast = idx === models.length - 1;
+            return (
+              <th scope="col" class={`p-4 min-w-[260px] w-[270px] bg-slate-900/70 ${!isLast ? 'border-r border-workspace-border/60' : ''}`}>
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <span class={`w-2.5 h-2.5 rounded-full ${model.dotBg} shadow-sm ${model.dotShadow}`}></span>
+                    <span class="font-bold text-white text-sm">{model.name}</span>
+                  </div>
+                  <span class={`text-[10px] px-1.5 py-0.5 rounded border ${model.badgeClass}`}>
+                    {model.provider}
+                  </span>
+                </div>
+                <div class="text-[11px] text-slate-400 mt-1 font-sans">{model.tagline}</div>
+              </th>
+            );
+          })}
+
+        </tr>
+      </thead>
+
+      <tbody class="divide-y divide-workspace-border/70 text-xs">
+        {metrics.map((metric) => (
+          <MatrixRow metric={metric} models={models} />
+        ))}
+      </tbody>
+    </table>
+  </div>
+</section>
